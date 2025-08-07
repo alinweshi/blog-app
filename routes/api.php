@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -13,6 +14,7 @@ Route::prefix('users')->group(function () {
     Route::post('/refresh-token', [\App\Http\Controllers\Auth\JwtAuthController::class, 'refreshToken']);
     Route::post('/logout', [\App\Http\Controllers\Auth\JwtAuthController::class, 'logout']);
 });
+Route::apiResource('posts', PostController::class);
 
 
 

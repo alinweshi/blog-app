@@ -30,4 +30,5 @@ interface TokenControlInterface
 
     public function refresh(): string;
     public function tokenData(string $token): array;
+    public function respondWithToken($token): \Illuminate\Http\JsonResponse;
 }

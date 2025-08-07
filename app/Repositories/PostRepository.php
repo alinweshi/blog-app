@@ -13,6 +13,10 @@ class PostRepository extends BaseRepository
     {
         parent::__construct($post);
     }
+    public function index(): array
+    {
+        return $this->post::select('title', 'description')->paginate(10)->toArray();
+    }
     // public function store(array $data): Post
     // {
     //     return $this->model->create($data);

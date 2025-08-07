@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+
 use Illuminate\Http\Request;
 use App\Services\AuthService;
 use App\Interfaces\AuthInterface;
@@ -18,8 +19,11 @@ class JwtAuthController extends Controller
 
     public function login(UserLoginRequest $request)
     {
+        // dd($request->validated());
         $credentials = $request->only('email', 'password');
+        // dd($credentials);
         $result = $this->authService->login($credentials);
+        // dd($result);
 
         if ($result) {
             return response()->json($result, 200);
@@ -66,5 +70,9 @@ class JwtAuthController extends Controller
         $userData = $request->only('id', 'name', 'email');
         $token = $this->tokenControl->generateToken($userData);
         return response()->json(['token' => $token], 201);
+    }
+    public function respondWithToken($token)
+    {
+        return $this->tokenControl->respondWithToken($token);
     }
 }

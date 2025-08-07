@@ -7,16 +7,17 @@ use App\Interfaces\AuthInterface;
 use App\Interfaces\TokenControlInterface;
 use Illuminate\Support\Facades\Auth;
 
-class AuthService
+class AuthService implements AuthInterface
 {
+    public function __construct(protected TokenControlInterface $tokenControl) {}
 
     public function login(array $credentials)
     {
-        if (Auth::attempt($credentials)) {
-            $user = Auth::user();
+        if ($token = Auth::guard('api')->attempt($credentials)) {
+            $user = Auth::guard('api')->user();
             return [
                 'user' => $user,
-                'token' => $this->generateToken($user->toArray())
+                'token' => $this->tokenControl->respondWithToken($token)
             ];
         }
         return null;
@@ -33,7 +34,6 @@ class AuthService
         $user = User::create($data);
         return [
             'user' => $user,
-            'token' => $this->generateToken($user->toArray())
         ];
     }
 
@@ -58,6 +58,7 @@ class AuthService
     }
     public function generateToken(array $userData): string
     {
+        // dd(Auth::loginUsingId($userData['id']));
         return Auth::loginUsingId($userData['id']);
     }
 }

@@ -37,4 +37,19 @@ class TokenControlService implements TokenControlInterface
     {
         Auth::invalidate($token);
     }
+    /**
+     * Get the token array structure.
+     *
+     * @param  string $token
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function respondWithToken($token): \Illuminate\Http\JsonResponse
+    {
+        return response()->json([
+            'access_token' => $token,
+            'token_type' => 'bearer',
+            'expires_in' => auth()->guard('api')->factory()->getTTL() * 60
+        ]);
+    }
 }

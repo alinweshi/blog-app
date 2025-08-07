@@ -13,6 +13,8 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind('App\Interfaces\AuthInterface', 'App\Services\AuthService');
         $this->app->bind('App\Interfaces\TokenControlInterface', 'App\Services\TokenControlService');
+        $this->app->bind('App\Interfaces\PostReadInterface', 'App\Services\PostReadService');
+        $this->app->bind('App\Interfaces\PostWriteInterface', 'App\Services\PostWriteService');
         if ($this->app->environment('local') && class_exists(\Laravel\Telescope\TelescopeServiceProvider::class)) {
             $this->app->register(\Laravel\Telescope\TelescopeServiceProvider::class);
             $this->app->register(TelescopeServiceProvider::class);

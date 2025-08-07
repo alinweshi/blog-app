@@ -11,7 +11,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->bind('App\Interfaces\AuthInterface', 'App\Services\AuthService');
+        $this->app->bind('App\Interfaces\TokenControlInterface', 'App\Services\TokenControlService');
     }
 
     /**

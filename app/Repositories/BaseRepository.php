@@ -21,7 +21,7 @@ abstract class BaseRepository implements ModelWriteInterface, ModelReadInterface
 
     public function index(): array
     {
-        return $this->model::all()->toArray();
+        return $this->model::latest()->paginate(10)->toArray();
     }
 
     public function show($model): Model

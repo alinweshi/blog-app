@@ -23,7 +23,8 @@ class UserLoginRequest extends ApiFormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|email|exists:users,email',
+            // 'email' => 'required|email|exists:users,email',
+            'phone' => 'required|exists:users,phone|numeric|digits:11',
             'password' => 'required|string|min:6',
         ];
     }

@@ -20,7 +20,7 @@ class JwtAuthController extends Controller
     public function login(UserLoginRequest $request)
     {
         // dd($request->validated());
-        $credentials = $request->only('email', 'password');
+        $credentials = $request->only('phone', 'password');
         // dd($credentials);
         $result = $this->authService->login($credentials);
         // dd($result);

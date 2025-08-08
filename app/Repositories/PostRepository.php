@@ -15,7 +15,10 @@ class PostRepository extends BaseRepository
     }
     public function index(): array
     {
-        return $this->post::select('title', 'description')->paginate(10)->toArray();
+        return $this->post::with('user:id,first_name,last_name')->select('title', 'description', 'user_id')->where('user_id', '!=', auth('api')->user()->id)->orderBy('created_at', 'desc')->paginate(10)->through(function ($post) {
+            $post->description = mb_strimwidth($post->description, 0, 512, '...');
+            return $post;
+        })->toArray();
     }
     // public function store(array $data): Post
     // {

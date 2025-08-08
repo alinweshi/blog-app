@@ -81,4 +81,12 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+    public function getFullNameAttribute()
+    {
+        return $this->first_name . " " . $this->last_name;
+    }
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
 }

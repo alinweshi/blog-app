@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserController;
+
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
@@ -27,6 +29,8 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 Route::prefix('admin')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
     Route::resource('/users', UserController::class);
+
+    Route::get('/users/{user}/posts', [UserController::class, 'posts'])->name('user.posts');
     Route::get('/posts', [DashboardController::class, 'posts'])->name('admin.posts');
-    Route::get('/posts', [DashboardController::class, 'post'])->name('admin.posts');
+    Route::resource('posts', PostController::class);
 });

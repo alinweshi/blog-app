@@ -98,6 +98,7 @@
                                             Delete
                                         </button>
                                     </form>
+
                                     <a href="{{ route('user.posts', $user) }}" class="btn btn-info btn-sm">Posts</a>
                                 </div>
                             </td>

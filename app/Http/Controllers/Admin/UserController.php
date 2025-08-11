@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+
 use App\Models\User;
 use App\Livewire\UserSearch;
 use Illuminate\Http\Request;
@@ -19,6 +20,7 @@ class UserController extends Controller
         // Logic to handle user search can be added here
         return UserSearch::render();
     }
+
     public function posts(User $user)
     {
         $posts = $user->posts; // Assuming User model has a posts relationship

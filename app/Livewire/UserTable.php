@@ -25,12 +25,7 @@ class UserTable extends Component
     {
         $this->status = $value;
     }
-    /**
-     * Updates the per page count.
-     *
-     * @param int $value The per page count
-     * @return void
-     */
+
     public function updatingPerPage($value)
     {
         $this->perPage = $value;

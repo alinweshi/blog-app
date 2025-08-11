@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\UserController;
-use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\DashboardController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -28,4 +29,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
     Route::resource('/users', UserController::class);
     Route::get('/posts', [DashboardController::class, 'posts'])->name('admin.posts');
+    Route::get('/users/{user}/posts', [UserController::class, 'posts'])->name('user.posts');
+    Route::get('/posts', [DashboardController::class, 'posts'])->name('admin.posts');
+    Route::resource('posts', PostController::class);
 });
